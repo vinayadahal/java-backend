@@ -29,6 +29,10 @@ spec:
             limits: # this is the limit on how much cpu can this pod use
               cpu: 1000m # this 'm' refers to the microns for cpu and 1000 microns = 1 cpu core and 'mi' refers to the megabit for the ram.
               memory: 512Mi
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
 ---
 apiVersion: v1
 kind: Service
