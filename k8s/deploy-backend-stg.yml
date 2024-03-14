@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: adex-webapp-backend-deployment
-  namespace: adex-webapp
+  name: adex-webapp-backend-deployment-stg
+  namespace: adex-webapp-stg
   labels:
-    app: adex-webapp-backend-label
+    app: adex-webapp-backend-label-stg
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: adex-webapp-backend-label
+      app: adex-webapp-backend-label-stg
   template:
     metadata:
       labels:
-        app: adex-webapp-backend-label
+        app: adex-webapp-backend-label-stg
     spec:
       containers:
-        - name: adex-webapp-backend-pod
-          image: bidahal/nodejs-back
+        - name: adex-webapp-backend-pod-stg
+          image: bidahal/nodejs-back:stg
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -33,14 +33,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: adex-webapp-backend-service
-  namespace: adex-webapp
+  name: adex-webapp-backend-service-stg
+  namespace: adex-webapp-stg
 spec:
   type: NodePort
   selector:
-    app: adex-webapp-backend-label
+    app: adex-webapp-backend-label-stg
   ports:
     - protocol: TCP
       port: 8181
       targetPort: 8080
-      nodePort: 30200
+      nodePort: 30201
