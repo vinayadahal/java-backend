@@ -55,12 +55,15 @@ pipeline {
                     if (branch_name == "main") {
                         echo "Applying changes to the main k8s cluster"
                         sh 'kubectl apply -f k8s/deploy-backend.yml'
+                        sh 'kubectl apply -f k8s/hpa.yml'
                     } else if (branch_name == "stg") {
                         echo "Applying changes to the main k8s cluster for stg branch"
                         sh 'kubectl apply -f k8s/deploy-backend-stg.yml'
+                        sh 'kubectl apply -f k8s/hpa-stg.yml'
                     } else if (branch_name == "dev") {
                         echo "Applying changes to the main k8s cluster for dev branch"
                         sh 'kubectl apply -f k8s/deploy-backend-dev.yml'
+                        sh 'kubectl apply -f k8s/hpa-dev.yml'
                     } else {
                         echo "Skipping deploy for feature branch: $branch_name..."
                     }
